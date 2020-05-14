@@ -211,9 +211,15 @@ public class CoffeeMachine {
                 break;
 
             case INPUT_WATER:
-                addWater(Integer.parseInt(s));
+                try {
+                    addWater(Integer.parseInt(s));
+                    state = State.ADD_MILK;
+                }
+                catch (NumberFormatException e) {
+                    System.out.println("I don't understand, it's not a number!");
+                    state = State.ADD_WATER;
+                }
 
-                state = State.ADD_MILK;
                 handler();
 
                 break;
@@ -226,9 +232,15 @@ public class CoffeeMachine {
                 break;
 
             case INPUT_MILK:
-                addMilk(Integer.parseInt(s));
+                try {
+                    addMilk(Integer.parseInt(s));
+                    state = State.ADD_COFFEE;
+                }
+                catch (NumberFormatException e) {
+                    System.out.println("I don't understand, it's not a number!");
+                    state = State.ADD_MILK;
+                }
 
-                state = State.ADD_COFFEE;
                 handler();
 
                 break;
@@ -241,9 +253,16 @@ public class CoffeeMachine {
                 break;
 
             case INPUT_COFFEE:
-                addCoffee(Integer.parseInt(s));
+                try {
+                    addCoffee(Integer.parseInt(s));
 
-                state = State.ADD_CUPS;
+                    state = State.ADD_CUPS;
+                }
+                catch (NumberFormatException e) {
+                    System.out.println("I don't understand, it's not a number!");
+                    state = State.ADD_COFFEE;
+                }
+
                 handler();
 
                 break;
@@ -256,9 +275,16 @@ public class CoffeeMachine {
                 break;
 
             case INPUT_CUPS:
-                addCup(Integer.parseInt(s));
+                try {
+                    addCup(Integer.parseInt(s));
 
-                state = State.GLOBAL_MENU;
+                    state = State.GLOBAL_MENU;
+                }
+                catch (NumberFormatException e) {
+                    System.out.println("I don't understand, it's not a number!");
+                    state = State.ADD_CUPS;
+                }
+
                 handler();
 
                 break;
